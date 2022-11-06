@@ -30,3 +30,19 @@ function operate (operator, num1, num2) {
     }
 }
 
+//puts numbers on display when the key is clicked
+function numberClick () {
+    const displayText = document.querySelector("#displayText")
+    const numberButtons = document.querySelectorAll(".number");
+
+    //loops through each button and makes them appear on display
+    for (const numberButton of numberButtons) {
+        numberButton.addEventListener('click', () => {
+            displayText.innerHTML += numberButton.textContent;
+        })
+    }
+// 
+
+}
+
+numberClick();
