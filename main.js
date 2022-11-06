@@ -30,6 +30,9 @@ function operate (operator, num1, num2) {
     }
 }
 
+let displayValue = 0; //stores the value of the number that is on display
+
+
 //puts numbers on display when the key is clicked
 function numberClick () {
     const displayText = document.querySelector("#displayText")
@@ -39,9 +42,9 @@ function numberClick () {
     for (const numberButton of numberButtons) {
         numberButton.addEventListener('click', () => {
             displayText.innerHTML += numberButton.textContent;
+            displayValue += "" + numberButton.textContent;
         })
     }
-// 
 
 }
 
