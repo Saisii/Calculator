@@ -30,12 +30,19 @@ function operate (operator, num1, num2) {
     }
 }
 
-let displayValue = 0; //stores the value of the number that is on display
+const displayText = document.querySelector("#displayText");
+
+let displayValue = 0; //stores the value of the number that is on display as a string
+
+let storedValueA = 0; //stores the first value of the calculation
+let storedValueB = 0; //stores the second value of the calcuation
+
+let firstClick = true; //checks to see if its the first click. 
 
 
 //puts numbers on display when the key is clicked
 function numberClick () {
-    const displayText = document.querySelector("#displayText")
+    
     const numberButtons = document.querySelectorAll(".number");
 
     //loops through each button and makes them appear on display
@@ -48,4 +55,56 @@ function numberClick () {
 
 }
 
+function operatorClick () {
+    const operatorButtons = document.querySelectorAll(".operator");
+    let lastOperation;
+
+    for (const operatorButton of operatorButtons) {
+        operatorButton.addEventListener('click', () => {
+            
+            if (firstClick == true) {
+                storedValueA = Number(displayValue);
+                displayValue = 0;
+                firstClick = false;
+            
+            }
+            else {
+                storedValueB += storedValueA;
+                switch (lastOperation) {
+                    case "+": 
+                        storedValueB = add(storedValueB, Number(displayValue));
+                        break;
+                    case "-":
+                        storedValueB = subtract(storedValueB, Number(displayValue));
+                        break;
+
+                    case "*":
+                        storedValueB = multiply(storedValueB, Number(displayValue));
+                        break;
+
+                    case "/":
+                        storedValueB = divide(storedValueB, Number(displayValue));
+                        break;
+                }
+
+                storedValueA = 0;
+                displayValue = 0;
+            }
+
+            lastOperation = operatorButton.textContent;
+
+            console.log("A: " + storedValueA);
+            console.log("B: " + storedValueB);
+            console.log("Operator: " + lastOperation);
+
+            // displayValue = storedValueB;
+
+            displayText.replaceChildren();
+
+
+        })
+    }
+}
+
 numberClick();
+operatorClick();
