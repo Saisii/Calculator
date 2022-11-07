@@ -20,27 +20,36 @@ header {
     display: flex;
     flex-direction: column;
     height: 500px;
-    width: 400px;
-    background-color: coral;
+    width: 350px;
+    background-color: #e1cfff;
     align-self: center;
+    border-radius:25px;
+    border-width: 5px;
+    border-color: black;
+    border-style: solid;
 }
 
 #buttons, 
 #display {
     width: 300px;
     margin: 25px;
-    background-color: green;
+    background-color: #8f93ea;
     align-self: center;
 
 }
 
 #display {
     height: 100px;
+    border-radius: 25px;
+    border-width: 5px;
+    border-color: black;
+    border-style: solid;
 }
 
 #displayText {
     font-size: 40px;
     text-align: end;
+    margin: 25px;
 }
 
 #buttons {
@@ -48,6 +57,11 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    border-radius: 25px;
+    border-width: 5px;
+    border-color: black;
+    border-style: solid;
+    
 }
 
 .button {
@@ -57,6 +71,21 @@ header {
     margin: 10px;
     align-self: center;
     text-align: center;
+    border-radius: 25px;
+    border-width: 3px;
+    border-color: black;
+}
+
+.button:hover {background-color: #3d426e;}
+
+.number {
+    background-color: #4e5c94;
+    color: white;
+}
+
+.operator {
+    background-color: #1c2b4a;
+    color: white;
 }
 
 footer {
