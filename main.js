@@ -93,6 +93,9 @@ function operatorClick () {
                     case "/":
                         storedValueB = divide(storedValueB, Number(displayValue));
                         break;
+                    case "=":
+                        break;
+                        
                 }
 
                 storedValueA = 0;
