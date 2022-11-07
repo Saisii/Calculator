@@ -30,15 +30,7 @@ function operate (operator, num1, num2) {
     }
 }
 
-const displayText = document.querySelector("#displayText");
 
-let displayValue = 0; //stores the value of the number that is on display as a string
-
-let storedValueA = 0; //stores the first value of the calculation
-let storedValueB = 0; //stores the second value of the calcuation
-
-let firstClickOperator = true; //checks to see if its the first click. 
-let firstClickAfterOperator = false;
 
 
 //puts numbers on display when the key is clicked
@@ -48,9 +40,13 @@ function numberClick () {
 
     //loops through each button and makes them appear on display
     for (const numberButton of numberButtons) {
+
         numberButton.addEventListener('click', () => {
+
             if (firstClickAfterOperator == true) {
+
                 displayText.replaceChildren(); //clears display
+
                 firstClickAfterOperator = false;
             }
 
@@ -61,6 +57,7 @@ function numberClick () {
 
 }
 
+//does the operation of the specific button when clicked
 function operatorClick () {
     const operatorButtons = document.querySelectorAll(".operator");
     let lastOperation;
@@ -91,8 +88,15 @@ function operatorClick () {
                         break;
 
                     case "/":
-                        storedValueB = divide(storedValueB, Number(displayValue));
-                        break;
+                        if (Number(displayValue) == 0) {
+                            alert("can't divide by zero");
+                            reset ();
+                            break;
+                        }
+                        else {
+                            storedValueB = divide(storedValueB, Number(displayValue));
+                            break;
+                        }
                     case "=":
                         break;
                         
@@ -102,7 +106,9 @@ function operatorClick () {
                 displayValue = 0;
 
                 displayText.replaceChildren(); //clears display
-                displayText.replaceChildren(storedValueB); //displays calculated total
+
+                //displays calculated total as rounded to 2 decimals
+                displayText.replaceChildren(Math.round(storedValueB * 100) / 100); 
             }
 
             lastOperation = operatorButton.textContent;
@@ -120,5 +126,37 @@ function operatorClick () {
     }
 }
 
+//clears the calculator back to original state when the button is clicked
+function clearClick () {
+    const clearButton = document.querySelector("#clear");
+
+    clearButton.addEventListener('click', () => {
+        reset();
+    })
+}
+
+//resets calculator back to original state
+function reset () {
+    displayValue = 0;
+    storedValueA = 0;
+    storedValueB = 0;
+    firstClickAfterOperator = true;
+    firstClickOperator = true;
+    displayText.replaceChildren(displayValue);
+}
+
+
+const displayText = document.querySelector("#displayText");
+
+let displayValue = 0; //stores the value of the number that is on display as a string
+
+let storedValueA = 0; //stores the first value of the calculation
+let storedValueB = 0; //stores the second value of the calcuation
+
+let firstClickOperator = true; //checks to see if its the first click. 
+let firstClickAfterOperator = false;
+
+
 numberClick();
 operatorClick();
+clearClick();
